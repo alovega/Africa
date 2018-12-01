@@ -21,14 +21,14 @@ class BucketlistTestCase(unittest.TestCase):
 
     def test_bucketlist_creation(self):
         """test the end point create a bucketlist(POST request)"""
-        res = self.client().post('/bucketlists/', data=self.bucketlist)
+        res = self.client().post('/bucketlists/', json=self.bucketlist)
         self.assertEqual(res.status_code, 201)
         self.assertIn('Go to Borabora', str(res.data))
 
 
     def test_api_can_get_all_bucketlists(self):
         """Test API can get a bucketlist(GET requests)."""
-        res = self.client().post('/bucketlists/', data=self.bucketlist)
+        res = self.client().post('/bucketlists/', json=self.bucketlist)
         self.assertEqual(res.status_code, 201)
         res = self.client().get('/bucketlists/')
         self.assertEqual(res.status_code, 200)
@@ -36,7 +36,7 @@ class BucketlistTestCase(unittest.TestCase):
 
     def test_api_can_get_bucketlist_by_id(self):
         """Test API can get a single bucketlist by using its id."""
-        rv = self.client().post('/bucketlists/', data = self.bucketlist)
+        rv = self.client().post('/bucketlists/', json = self.bucketlist)
         self.assertEqual(rv.status_code, 201)
         result_in_json = json.loads(rv.data.decode('utf-8').replace("'", "\""))
         result = self.client().get(
@@ -48,12 +48,12 @@ class BucketlistTestCase(unittest.TestCase):
     def test_bucketlist_can_be_edited(self):
         """Test API can edit an existing bucketlist. (PUT request)"""
         rv = self.client().post(
-            '/bucketlists/', data={"name": "Eat, pray and love"}
+            '/bucketlists/', json={"name": "Eat, pray and love"}
         )
         self.assertEqual(rv.status_code, 201)
         rv = self.client().put(
             '/bucketlists/1',
-            data={
+            json={
                 "name": "Dont just eat, but also pray and love :-)"
             }
         )
@@ -65,7 +65,7 @@ class BucketlistTestCase(unittest.TestCase):
         """Test API can delete an existing bucketlist. (DELETE request)."""
         rv = self.client().post(
             '/bucketlists/',
-            data={'name': 'Eat, pray and love'}
+            json={'name': 'Eat, pray and love'}
         )
         self.assertEqual(rv.status_code, 201)
         res = self.client().delete('/bucketlists/1')

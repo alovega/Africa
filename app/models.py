@@ -20,7 +20,6 @@ class  Bucketlist(db.Model):
         """initialise with name"""
         self.name = name
 
-
     def save(self):
         db.session.add(self)
         db.session.commit()

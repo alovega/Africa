@@ -12,6 +12,7 @@ class Config(object):
 class DevelopmentConfig(Config):
     """Configurations for Development."""
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:LUG4Z1V4@localhost:5432/africa_app'
 
 
 class TestingConfig(Config):
