@@ -1,6 +1,6 @@
 import json
 
-from flask_restful import Resource, reqparse, fields, marshal_with, marshal, abort
+from flask_restful import Resource, reqparse, fields, marshal, abort
 from app.models import Bucketlist
 
 Bucket_fields = {
